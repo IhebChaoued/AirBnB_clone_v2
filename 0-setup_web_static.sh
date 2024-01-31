@@ -26,11 +26,11 @@ echo -e "<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # Give ownership to the ubuntu user and group
-sudo chown -R ubuntu:ubuntu /data/
+sudo chown -hR ubuntu:ubuntu /data/
 
 # Update Nginx configuration with alias
 nginx_config="/etc/nginx/sites-available/default"
-sudo sed -i '/location \/hbnb_static {/!b;n;c\alias /data/web_static/current/;' "$nginx_config"
+sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' "$nginx_config"
 
 # Restart Nginx
 sudo service nginx restart
