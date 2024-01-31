@@ -5,6 +5,7 @@ from fabric.api import local
 from datetime import datetime
 import os
 
+
 def do_pack():
     """.tgz archive"""
     try:
@@ -17,7 +18,7 @@ def do_pack():
 
         local("tar -cvzf {} web_static".format(archive_path))
 
-        print(f"web_static packed: {archive_path} -> {os.path.getsize(archive_path)}Bytes")
+        print(f"web_static packed: {archive_path} -> {size}Bytes")
 
         return archive_path
     except Exception as e:
