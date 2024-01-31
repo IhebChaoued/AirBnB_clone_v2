@@ -1,36 +1,28 @@
 #!/usr/bin/env bash
-
 # Install Nginx if not already installed
-sudo apt-get update
-sudo apt-get install -y nginx
 
-# Create /data/ if it doesn't exist
+if [ ! -x /usr/sbin/nginx ]
+then
+	sudo apt-get update
+	sudo apt-get upgrade -y
+	sudo apt-get install -y nginx
+	sudo service nginx start
+fi
+
 sudo mkdir -p /data
-
-# Create /data/web_static/ if it doesn't exist
 sudo mkdir -p /data/web_static
-
-# Create /data/web_static/releases/ if it doesn't exist
 sudo mkdir -p /data/web_static/releases
-
-# Create /data/web_static/shared/ if it doesn't exist
 sudo mkdir -p /data/web_static/shared
-
-# Create /data/web_static/releases/test/ if it doesn't exist
 sudo mkdir -p /data/web_static/releases/test
-
-# Create a fake HTML file with simple content
-echo -e "<html>\n  <head>\n  </head>\n  <body>\n    Holberton School\n  </body>\n</html>" | sudo tee /data/web_static/releases/test/index.html
-
-# Create or recreate symbolic link
+echo "<html>
+<head>
+</head>
+<body>
+Holberton School
+</body>\n</html>" | sudo tee /data/web_static/releases/test/index.html
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
-
-# Give ownership to the ubuntu user and group
 sudo chown -hR ubuntu:ubuntu /data/
-
-# Update Nginx configuration with alias
-nginx_config="/etc/nginx/sites-available/default"
-sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' "$nginx_config"
+sudo sed -i '/listen 80 default_server/a location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default
 
 # Restart Nginx
 sudo service nginx restart
