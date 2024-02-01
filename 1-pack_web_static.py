@@ -18,7 +18,7 @@ def do_pack():
 
         local("tar -cvzf {} web_static".format(archive_path))
 
-        print(f"web_static packed: {archive_path} -> {size}Bytes")
+        print("web_static packed: {} -> {}Bytes".format(archive_path, size))
 
         return archive_path
     except Exception as e:
