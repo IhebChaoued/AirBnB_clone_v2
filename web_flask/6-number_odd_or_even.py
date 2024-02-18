@@ -47,14 +47,10 @@ def display_number_template(n):
 def display_number_odd_or_even(n):
     """ Route for the '/number_odd_or_even/<int:n>' endpoint """
     if n % 2 == 0:
-        result = "even"
+        p = "even"
     else:
-        result = "odd"
-    return render_template(
-            '6-number_odd_or_even.html',
-            number=n,
-            your_variable_here=result
-            )
+        p = "odd"
+    return render_template('6-number_odd_or_even.html', number=n, x=p)
 
 
 if __name__ == "__main__":
