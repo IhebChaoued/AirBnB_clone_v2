@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a base class for all models in our hbnb clone"""
+"""Define base class for all models in hbnb clone"""
 import models
 import uuid
 import datetime
@@ -12,7 +12,7 @@ Base = declarative_base()
 
 
 class BaseModel:
-    """A base class for all hbnb models"""
+    """hbnb models"""
 
     id = Column(String(60), primary_key=True,
                 nullable=False, unique=True)
@@ -23,7 +23,7 @@ class BaseModel:
                         onupdate=datetime.datetime.utcnow)
 
     def __init__(self, *args, **kwargs) -> None:
-        """Initialization of BaseModel Class"""
+        """Initialization"""
         self.id = str(uuid.uuid4())
         self.created_at = datetime.datetime.now()
         self.updated_at = datetime.datetime.now()
@@ -60,5 +60,5 @@ class BaseModel:
         return dictionary
 
     def delete(self):
-        """Docs"""
+        """Delete"""
         models.storage.delete(self)

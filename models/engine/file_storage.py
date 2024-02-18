@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""This module defines a class to manage file storage for hbnb clone"""
+"""File storage for hbnb clone"""
 import json
 
 
 class FileStorage:
-    """This class manages storage of hbnb models in JSON format"""
+    """Manage Storage"""
     __file_path = 'file.json'
     __objects = {}
 
@@ -13,9 +13,7 @@ class FileStorage:
         """Retruns Cities in state"""
 
     def delete(self, obj=None):
-        """loop through __objects, compare each value
-        of key with cls argument wich is object
-        """
+        """Delete"""
         if obj:
             id = obj.to_dict()["id"]
             className = obj.to_dict()["__class__"]
@@ -25,7 +23,7 @@ class FileStorage:
                 self.save()
 
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
+        """Return Dictionary"""
         print_dict = {}
         if cls:
             className = cls.__name__
@@ -37,11 +35,11 @@ class FileStorage:
             return FileStorage.__objects
 
     def new(self, obj):
-        """Adds new object to storage dictionary"""
+        """Add New Object"""
         self.all().update({obj.to_dict()['__class__'] + '.' + obj.id: obj})
 
     def save(self):
-        """Saves storage dictionary to file"""
+        """Save"""
         with open(FileStorage.__file_path, 'w') as f:
             temp = {}
             temp.update(FileStorage.__objects)
@@ -50,7 +48,7 @@ class FileStorage:
             json.dump(temp, f)
 
     def reload(self):
-        """Loads storage dictionary from file"""
+        """Load Storage"""
         from models.base_model import BaseModel
         from models.user import User
         from models.place import Place
@@ -73,5 +71,5 @@ class FileStorage:
             pass
 
     def close(self):
-        """doc metho"""
+        """Reload"""
         self.reload()

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" module doc """
+""" Flask web application """
 from flask import Flask
 from flask import render_template
 from models import storage
@@ -10,38 +10,38 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello():
-    """ def doc """
+    """ Hello """
     return "Hello HBNB!"
 
 
 @app.route("/hbnb", strict_slashes=False)
 def hbnb():
-    """ def doc """
+    """ hbnb """
     return "HBNB"
 
 
 @app.route('/c/<text>', strict_slashes=False)
 def c(text):
-    """ def doc """
+    """ c text """
     return 'c {}'.format(text.replace("_", " "))
 
 
 @app.route('/python', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python(text):
-    """ def doc """
+    """ Python """
     return 'Python {}'.format(text.replace("_", " "))
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
 def number(n):
-    """ def doc """
+    """ num """
     return '{} is a number'.format(n)
 
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_odd_or_even(n):
-    """ def doc """
+    """ odd or even """
     if n % 2 == 0:
         p = 'even'
     else:
@@ -51,20 +51,20 @@ def number_odd_or_even(n):
 
 @app.route('/states_list', strict_slashes=False)
 def states_list():
-    """ def doc """
+    """ states """
     states = storage.all(State)
     return render_template('7-states_list.html', states=states)
 
 
 @app.teardown_appcontext
 def close(error):
-    """ def doc """
+    """ close """
     storage.close()
 
 
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_by_states():
-    """ def doc """
+    """ cities by states """
     states = storage.all(State)
     return render_template('8-cities_by_states.html', states=states)
 

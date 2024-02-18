@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This module defines a class to manage file storage for hbnb clone"""
+"""Storage for hbnb clone"""
 from models.user import User
 from models.place import Place
 from models.state import State
@@ -13,13 +13,13 @@ from os import getenv
 
 
 class DBStorage:
-    """Class Docs"""
+    """DB Storage"""
 
     __engine = None
     __session = None
 
     def __init__(self):
-        """Function Docs"""
+        """Initialization"""
         hb_user = getenv("HBNB_MYSQL_USER")
         hb_pwd = getenv("HBNB_MYSQL_PWD")
         hb_host = getenv("HBNB_MYSQL_HOST")
@@ -35,7 +35,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def reload(self):
-        """ reload method """
+        """Reload"""
         Base.metadata.create_all(self.__engine)
         Session = scoped_session(
             sessionmaker(bind=self.__engine, expire_on_commit=False)
@@ -43,9 +43,7 @@ class DBStorage:
         self.__session = Session()
 
     def all(self, cls=None, id=None):
-        """
-        Query all classes or specific one by ID
-        """
+        """All Classes"""
         allClasses = [User, Place, State, City, Amenity, Review]
         result = {}
 
@@ -77,23 +75,23 @@ class DBStorage:
         return result
 
     def search(self, cls, id):
-        """ def doc """
+        """Search"""
         data = self.all(cls)
 
     def new(self, obj):
-        """add new obj"""
+        """New Obj"""
         if obj:
             self.__session.add(obj)
 
     def save(self):
-        """commit all changes"""
+        """Commit"""
         self.__session.commit()
 
     def delete(self, obj=None):
-        """delete from the current database session"""
+        """Delete"""
         if obj:
             self.__session.delete(obj)
 
     def close(self):
-        """doc meth"""
+        """Close"""
         self.__session.close()
