@@ -10,6 +10,7 @@ def index():
     """ Route for the main index """
     return "Hello HBNB!"
 
+
 @app.route("/hbnb", strict_slashes=False)
 def indextwo():
     """ Route for the '/hbnb' endpoint """
