@@ -1,13 +1,15 @@
 #!/usr/bin/python3
-""" Flask App Initialization """
+"""Starts a Flask web application"""
+
 from flask import Flask
 
 app = Flask(__name__)
 
 
+# Define the route for the root URL.
 @app.route("/", strict_slashes=False)
-def index():
-    """ Route for the main index """
+def hello():
+    """Display 'Hello HBNB'"""
     return "Hello HBNB!"
 
 
