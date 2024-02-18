@@ -52,7 +52,8 @@ def display_number_odd_or_even(n):
         result = "odd"
     return render_template(
             '6-number_odd_or_even.html',
-            number=n, your_variable_here=result
+            number=n,
+            your_variable_here=result
             )
 
 
